@@ -1,0 +1,47 @@
+﻿@namespace BlazorModalPlus
+@inherits BsConfirmDialogBase
+
+@if (Visible)
+{
+    <div class="modal fade show d-block" tabindex="-1" id="confirmModalDialog" data-bs-theme="@BsDarkMode" @attributes="UserAttributes">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-opacity-50 @(DarkMode == DarkModeDialog.Light ? "bg-dark" : "bg-light")">
+                    @if (HeaderTemplate != null)
+                    {
+                        @HeaderTemplate
+                    }
+                    else
+                    {
+                        <h1 class="modal-title text-white fs-4">@Title</h1>
+                    }
+                </div>
+                <div class="modal-body">
+                    <p>@GetMsgMarkupString()</p>
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                    @if (FooterTemplate != null)
+                    {
+                        <div>
+                            @FooterTemplate
+                        </div>
+                    }
+
+                    <div class="flex-grow-1 d-flex justify-content-end gap-2">
+                        @if (Buttons == null || Buttons.Count() == 0)
+                        {
+                            <div> <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="() => Visible=false">Close</button> </div>
+                        }
+                        else
+                        {
+                            foreach (var btn in Buttons)
+                            {
+                                <div> <button type="button" class="btn @GetBtnRender(btn.RenderStyle)" @onclick="() => ButtonClick(btn.Click.Value)">@btn.Caption</button> </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
