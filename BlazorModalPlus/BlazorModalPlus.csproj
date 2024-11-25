@@ -13,10 +13,11 @@
     <PackageIcon>Logo.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>components;component;blazor;blazor-server;blazor-webassembly;netcore;net8;csharp;c#;dialog;modal;confirmation</PackageTags>
-    <PackageLicenseFile>License.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/JorgeOctavioNA/BlazorModalPlus</PackageProjectUrl>
     <RepositoryUrl>https://github.com/JorgeOctavioNA/BlazorModalPlus</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <Version>1.0.0.0</Version>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
@@ -36,9 +37,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="LICENSE">
-      <Pack>True</Pack>
+    <None Update="Logo.png">
       <PackagePath>\</PackagePath>
+      <Pack>True</Pack>
     </None>
     <None Update="README.md">
       <Pack>True</Pack>

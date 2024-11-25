@@ -52,7 +52,6 @@ These components do not require additional configuration, however they are based
 ```
 
 
-
 ## How to use
 ### BsConfirmDialog
 
