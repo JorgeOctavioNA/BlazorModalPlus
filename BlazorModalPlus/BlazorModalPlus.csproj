@@ -11,9 +11,12 @@
     <Description>BlazorModalPlus is a Blazor library providing Bootstrap 5-based modal dialog components. These components are highly customizable and cater to a variety of confirmation and dialog use cases.</Description>
     <Copyright></Copyright>
     <PackageIcon>Logo.png</PackageIcon>
-    <PackageReadmeFile>Readme.md</PackageReadmeFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>components;component;blazor;blazor-server;blazor-webassembly;netcore;net8;csharp;c#;dialog;modal;confirmation</PackageTags>
     <PackageLicenseFile>License.txt</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/JorgeOctavioNA/BlazorModalPlus</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/JorgeOctavioNA/BlazorModalPlus</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
