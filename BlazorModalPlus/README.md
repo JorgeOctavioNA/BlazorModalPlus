@@ -53,8 +53,12 @@ These components do not require additional configuration, however they are based
 
 
 ## How to use
+![Usage](Usage.jpg)
+
 ### BsConfirmDialog
 
+
+![BsConfirmDialog](BsConfirmDialog.jpg)
 ```razor
 @using BlazorModalPlus
 
@@ -114,6 +118,7 @@ These components do not require additional configuration, however they are based
 ```
 
 ### BsSimpleConfirmDialog
+![BsSimpleConfirmDialog](BsSimpleConfirmDialog.jpg)
 ```razor
 @using BlazorModalPlus
 
