@@ -1,6 +1,6 @@
 # BlazorModalPlus
 
-**BlazorModalPlus** is a Blazor library providing Bootstrap 5-based modal dialog components. These components are highly customizable and cater to a variety of confirmation and dialog use cases.
+**BlazorModalPlus** is a Blazor library that provides Bootstrap 5-based modal dialog components. These components are highly customizable and fit a variety of confirmation and dialog use cases. Additionally, multi-language support is added.
 
 ## Features
 
@@ -13,6 +13,7 @@
   - Simplified for quick confirmations.
   - Displays a title, message, and predefined buttons based on `DialogButtons`.
   - Returns the button action via `EventCallback<DialogButtonResult>`.
+  - Service to support for Globalization and Localization
 
 Both components support light and dark themes using the Parameter `DarkMode`.
 
@@ -41,7 +42,24 @@ Add the following to `_Imports.razor`
 
 ## Getting Started
 
-These components do not require additional configuration, however they are based on Bootstrap version 5, therefore, it is necessary to include the Bootstrap references if it is not included in your project as follows:
+> [!NOTE]
+> BlazorModalPlus supports the following languages: en-US, es-MX, fr-FR, de-DE, it-IT, ja-JP, pt-PT & zh-CN
+
+To use the components, add the following to your `Program.cs` file:
+
+```csharp
+// In this case, we use "es-MX" as the default culture and support both "en-US" and "es-MX".
+builder.Services.AddBlazorModalPlusServices(
+    supportedCultures: new[] { "en-US","es-MX" }, 
+    defaultCulture: "es-MX");
+
+...
+
+var localizationOptions = app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value;
+app.UseRequestLocalization(localizationOptions);
+```
+
+The components are based on Bootstrap version 5, then, it is necessary to include the Bootstrap references if it is not included in your project as follows:
 
 ```html
 <head>

@@ -1,46 +1,57 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <ApplicationIcon>wwwroot\Logo.ico</ApplicationIcon>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Title>Providing a Bootstrap based modal Dialog with the possibility of customization.</Title>
-    <Authors>Jorge Octavio Núñez Arreguín</Authors>
-    <Description>BlazorModalPlus is a Blazor library providing Bootstrap 5-based modal dialog components. These components are highly customizable and cater to a variety of confirmation and dialog use cases.</Description>
-    <Copyright></Copyright>
-    <PackageIcon>Logo.png</PackageIcon>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageTags>components;component;blazor;blazor-server;blazor-webassembly;netcore;net8;csharp;c#;dialog;modal;confirmation</PackageTags>
-    <PackageProjectUrl>https://github.com/JorgeOctavioNA/BlazorModalPlus</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/JorgeOctavioNA/BlazorModalPlus</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <Version>1.0.0.0</Version>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<ApplicationIcon>wwwroot\Logo.ico</ApplicationIcon>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Title>Providing a Bootstrap based modal Dialog with the possibility of customization.</Title>
+		<Authors>Jorge Octavio Núñez Arreguín</Authors>
+		<Description>BlazorModalPlus is a Blazor library that provides Bootstrap 5-based modal dialog components. These components are highly customizable and fit a variety of confirmation and dialog use cases. Additionally, multi-language support is added.</Description>
+		<Copyright></Copyright>
+		<PackageIcon>Logo.png</PackageIcon>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageTags>components;component;blazor;blazor-server;blazor-webassembly;netcore;net8;csharp;c#;dialog;modal;confirmation</PackageTags>
+		<PackageProjectUrl>https://github.com/JorgeOctavioNA/BlazorModalPlus</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/JorgeOctavioNA/BlazorModalPlus</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<Version>1.2.0.0</Version>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<IncludeSymbols>True</IncludeSymbols>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Include="wwwroot\Logo.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\README.md">
+		  <Pack>True</Pack>
+		  <PackagePath>\</PackagePath>
+		</None>
+		<None Include="wwwroot\Logo.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <SupportedPlatform Include="browser" />
-  </ItemGroup>
+	<ItemGroup>
+		<SupportedPlatform Include="browser" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.11" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.11" />
+		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.1.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Localization" Version="2.1.1" />
+		<PackageReference Include="Microsoft.Extensions.Localization" Version="8.0.11" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Update="Logo.png">
-      <PackagePath>\</PackagePath>
-      <Pack>True</Pack>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Update="Logo.png">
+			<PackagePath>\</PackagePath>
+			<Pack>True</Pack>
+		</None>
+	</ItemGroup>
 
 </Project>

@@ -17,13 +17,13 @@ namespace BlazorModalPlus
         protected string Message { get; set; } = string.Empty;
         protected bool Visible { get; set; } = false;
 
-        public string BsDarkMode => Enum.GetName(typeof(DarkModeDialog), DarkMode).ToLower();
+        protected string BsDarkMode => Enum.GetName(typeof(DarkModeDialog), DarkMode).ToLower();
 
         protected MarkupString GetMsgMarkupString()
         {
             return new MarkupString(!string.IsNullOrEmpty(Message)
                 ? Message
-                : "Are you sure?"
+                : string.Empty
                 );
         }
 

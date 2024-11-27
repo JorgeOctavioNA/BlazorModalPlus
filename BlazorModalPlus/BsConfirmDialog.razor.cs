@@ -1,13 +1,23 @@
 using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Localization;
+
 namespace BlazorModalPlus;
 public partial class BsConfirmDialog : BsConfirmDialogBase
 {
+    /// <summary>
+    /// Fragment content (if necessary) for the Header of the Modal Dialog
+    /// </summary>
     [Parameter]
     public RenderFragment? HeaderTemplate { get; set; } = null;
 
+    /// <summary>
+    /// Fragment content (if necessary) for the Footer of the Modal Dialog
+    /// </summary>
     [Parameter]
     public RenderFragment? FooterTemplate { get; set; } = null;
 
+    [Inject]
+    public IStringLocalizer<Language> Localizer { get; set; }
 
     private async Task ButtonClick(EventCallback eventCallback)
     {
@@ -24,7 +34,7 @@ public partial class BsConfirmDialog : BsConfirmDialogBase
     public async Task ShowDialog(string message, string? title, IEnumerable<ButtonItem>? buttons)
     {
         Message = message;
-        Title = title ?? "Confirm";
+        Title = title ?? Localizer["ConfirmString"];
         Buttons = buttons;
 
         // Render the dialog
