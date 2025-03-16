@@ -1,6 +1,7 @@
 namespace BlazorModalPlus;
 
 using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 
 public partial class BsSimpleConfirmDialog
@@ -11,13 +12,33 @@ public partial class BsSimpleConfirmDialog
     [Parameter]
     public EventCallback<DialogButtonResult> ConfirmCallback { get; set; }
 
+    [Parameter]
+    public DialogSize Size { get; set; } = DialogSize.Medium;
+
     [Inject]
-    public IStringLocalizer<Language> Localizer { get; set; }
+    public IServiceProvider serviceProvider { get; set; }
+
+    private IStringLocalizer<Language>? localizer;
+
+    protected override void OnInitialized()
+    {
+        localizer = (IStringLocalizer<Language>?)serviceProvider.GetService(typeof(IStringLocalizer<Language>));
+    }
 
     private async Task ButtonClick(DialogButtonResult dialogButton)
     {
         Visible = false;
         await ConfirmCallback.InvokeAsync(dialogButton);
+    }
+
+    private string GetDialogSizeClass()
+    {
+        return Size switch
+        {
+            DialogSize.Small => "modal-sm",
+            DialogSize.Large => "modal-lg",
+            _ => ""
+        };
     }
 
     /// <summary>
@@ -30,7 +51,7 @@ public partial class BsSimpleConfirmDialog
     public async Task ShowDialog(string message, string? title, DialogButtons butonsConfiguration)
     {
         Message = message;
-        Title = title ?? Localizer["ConfirmString"];
+        Title = title ?? (localizer?["ConfirmString"] ?? "Confirm");
         Buttons = GetButtons(butonsConfiguration);
 
         // Render the dialog
@@ -52,23 +73,23 @@ public partial class BsSimpleConfirmDialog
         {
             DialogButtons.Ok => new List<ButtonItem>
             {
-                new ButtonItem(Localizer["ButtonOk"], BtnRenderStyle.Primary, DialogButtonResult.Ok, null)
+                new ButtonItem(localizer?["ButtonOk"] ?? "OK", BtnRenderStyle.Primary, DialogButtonResult.Ok, null)
             },
             DialogButtons.OkCancel => new List<ButtonItem>
             {
-                new ButtonItem(Localizer["ButtonOk"], BtnRenderStyle.Primary, DialogButtonResult.Ok, null),
-                new ButtonItem(Localizer["ButtonCancel"], BtnRenderStyle.Secondary, DialogButtonResult.Cancel, null)
+                new ButtonItem(localizer?["ButtonOk"] ?? "OK", BtnRenderStyle.Primary, DialogButtonResult.Ok, null),
+                new ButtonItem(localizer?["ButtonCancel"] ?? "Cancel", BtnRenderStyle.Secondary, DialogButtonResult.Cancel, null)
             },
             DialogButtons.YesNo => new List<ButtonItem>
             {
-                new ButtonItem(Localizer["ButtonYes"], BtnRenderStyle.Primary, DialogButtonResult.Yes, null),
-                new ButtonItem(Localizer["ButtonNo"], BtnRenderStyle.Secondary, DialogButtonResult.No, null)
+                new ButtonItem(localizer?["ButtonYes"] ?? "Yes", BtnRenderStyle.Primary, DialogButtonResult.Yes, null),
+                new ButtonItem(localizer?["ButtonNo"] ?? "No", BtnRenderStyle.Secondary, DialogButtonResult.No, null)
             },
             DialogButtons.YesNoCancel => new List<ButtonItem>
             {
-                new ButtonItem(Localizer["ButtonYes"], BtnRenderStyle.Primary, DialogButtonResult.Yes, null),
-                new ButtonItem(Localizer["ButtonNo"], BtnRenderStyle.Primary, DialogButtonResult.No, null),
-                new ButtonItem(Localizer["ButtonCancel"], BtnRenderStyle.Secondary, DialogButtonResult.Cancel, null)
+                new ButtonItem(localizer?["ButtonYes"] ?? "Yes", BtnRenderStyle.Primary, DialogButtonResult.Yes, null),
+                new ButtonItem(localizer?["ButtonNo"] ?? "No", BtnRenderStyle.Primary, DialogButtonResult.No, null),
+                new ButtonItem(localizer?["ButtonCancel"] ?? "Cancel", BtnRenderStyle.Secondary, DialogButtonResult.Cancel, null)
             },
             _ => throw new NotImplementedException()
         };

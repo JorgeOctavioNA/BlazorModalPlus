@@ -20,12 +20,32 @@ Both components support light and dark themes using the Parameter `DarkMode`.
 > [!NOTE]
 > The DarkMode is available since Bootstrap version 5.3. If you are using an older version, the DarkMode will not work.
 
+# Changelog
+
+## [1.3.0] - 2025-03-08
+### Added
+- **BsConfirmDialog**:
+  - Support for different dialog sizes (`DialogSize`).
+  - Support for icons in buttons (`ButtonItem.IconClass`).
+
+- **BsSimpleConfirmDialog**:
+  - Support for icons in buttons (`ButtonItem.IconClass`).
+
+### Changed
+- **BsConfirmDialog**:
+  - Null check for `localizer` and use of default values when not available.
+
+- **BsSimpleConfirmDialog**:
+  - Null check for `localizer` and use of default values when not available.
+
+### Fixed
+- Minor style corrections and reordering of CSS classes to improve readability and maintainability of the code.
 ---
 
 ## Prerequisites
 | Version | .NET |
 | :--- | :---: |
-| 1.0.0 | [.NET 8](https://dotnet.microsoft.com/download/dotnet/8.0) |
+| 1.3.0 | [.NET 8](https://dotnet.microsoft.com/download/dotnet/8.0) |
 
 ## Installation
 
@@ -45,7 +65,7 @@ Add the following to `_Imports.razor`
 > [!NOTE]
 > BlazorModalPlus supports the following languages: en-US, es-MX, fr-FR, de-DE, it-IT, ja-JP, pt-PT & zh-CN
 
-To use the components, add the following to your `Program.cs` file:
+To use language support (optional), add the following to your `Program.cs` file:
 
 ```csharp
 // In this case, we use "es-MX" as the default culture and support both "en-US" and "es-MX".
@@ -73,7 +93,6 @@ The components are based on Bootstrap version 5, then, it is necessary to includ
 ![Usage](Usage.jpg)
 
 ### BsConfirmDialog
-
 
 ![BsConfirmDialog](BsConfirmDialog.jpg)
 ```razor

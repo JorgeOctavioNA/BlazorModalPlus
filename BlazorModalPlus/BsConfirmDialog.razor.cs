@@ -16,13 +16,33 @@ public partial class BsConfirmDialog : BsConfirmDialogBase
     [Parameter]
     public RenderFragment? FooterTemplate { get; set; } = null;
 
+    [Parameter]
+    public DialogSize Size { get; set; } = DialogSize.Medium;
+
     [Inject]
-    public IStringLocalizer<Language> Localizer { get; set; }
+    public IServiceProvider serviceProvider { get; set; }
+
+    private IStringLocalizer<Language>? localizer;
+
+    protected override void OnInitialized()
+    {
+        localizer = (IStringLocalizer<Language>?)serviceProvider.GetService(typeof(IStringLocalizer<Language>));
+    }
 
     private async Task ButtonClick(EventCallback eventCallback)
     {
         Visible = false;
         await eventCallback.InvokeAsync();
+    }
+
+    private string GetDialogSizeClass()
+    {
+        return Size switch
+        {
+            DialogSize.Small => "modal-sm",
+            DialogSize.Large => "modal-lg",
+            _ => ""
+        };
     }
 
     /// <summary>
@@ -34,7 +54,7 @@ public partial class BsConfirmDialog : BsConfirmDialogBase
     public async Task ShowDialog(string message, string? title, IEnumerable<ButtonItem>? buttons)
     {
         Message = message;
-        Title = title ?? Localizer["ConfirmString"];
+        Title = title ?? (localizer?["ConfirmString"] ?? "Confirm");
         Buttons = buttons;
 
         // Render the dialog
@@ -43,5 +63,4 @@ public partial class BsConfirmDialog : BsConfirmDialogBase
         StateHasChanged();
         await Task.CompletedTask;
     }
-
 }
