@@ -3,34 +3,42 @@
 
 @if (Visible)
 {
-    <div class="modal fade show d-block" tabindex="-1" id="confirmModalDialog" data-bs-theme="@BsDarkMode" @attributes="UserAttributes">
-        <div class="modal-dialog @GetDialogSizeClass()">
+    <div class="modal fade show d-block" tabindex="-1" role="dialog" aria-modal="true" 
+         aria-labelledby="modal-title" aria-describedby="modal-body" 
+         data-bs-theme="@BsDarkMode" @onkeydown="OnKeyDown" @attributes="UserAttributes"
+         @onclick="@(CloseOnBackdropClick ? OnBackdropClick : null)">
+        <div class="modal-dialog @GetDialogSizeClass()" @onclick:stopPropagation="true">
             <div class="modal-content">
                 <div class="modal-header bg-opacity-50 @(DarkMode == DarkModeDialog.Light ? "bg-dark" : "bg-light")">
-                    <h1 class="modal-title fs-4 text-white">@Title</h1>
+                    <h1 class="modal-title fs-4 text-white" id="modal-title">@Title</h1>
+                    @if (CloseOnEscape)
+                    {
+                        <button type="button" class="btn-close btn-close-white" aria-label="Close" @onclick="HideDialog"></button>
+                    }
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" id="modal-body">
                     <p>@GetMsgMarkupString()</p>
                 </div>
                 <div class="modal-footer d-flex justify-content-between">
                     <div class="d-flex flex-grow-1 justify-content-end gap-2">
                         @if (Buttons == null || !Buttons.Any())
                         {
-                            <div> <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @onclick="() => Visible=false">Close</button> </div>
+                            <button type="button" class="btn btn-secondary" @onclick="HideDialog">
+                                Close
+                            </button>
                         }
                         else
                         {
                             foreach (var btn in Buttons)
                             {
-                                <div>
-                                    <button type="button" class="btn @GetBtnRender(btn.RenderStyle)" @onclick="( async () => await ButtonClick(btn.DialogResult.Value))">
-                                        @if (!string.IsNullOrEmpty(btn.IconClass))
-                                        {
-                                            <i class="@btn.IconClass"></i>
-                                        }
-                                        @btn.Caption
-                                    </button>
-                                </div>
+                                <button type="button" class="btn @GetBtnRender(btn.RenderStyle)" 
+                                        @onclick="(async () => await ButtonClick(btn.DialogResult.GetValueOrDefault()))">
+                                    @if (!string.IsNullOrEmpty(btn.IconClass))
+                                    {
+                                        <i class="@btn.IconClass me-1" aria-hidden="true"></i>
+                                    }
+                                    @btn.Caption
+                                </button>
                             }
                         }
                     </div>

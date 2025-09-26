@@ -16,33 +16,51 @@ public partial class BsConfirmDialog : BsConfirmDialogBase
     [Parameter]
     public RenderFragment? FooterTemplate { get; set; } = null;
 
+    /// <summary>
+    /// Size of the dialog
+    /// </summary>
     [Parameter]
     public DialogSize Size { get; set; } = DialogSize.Medium;
 
+    /// <summary>
+    /// Custom CSS classes for the dialog
+    /// </summary>
+    [Parameter]
+    public string? CustomCssClass { get; set; }
+
     [Inject]
-    public IServiceProvider serviceProvider { get; set; }
-
-    private IStringLocalizer<Language>? localizer;
-
-    protected override void OnInitialized()
-    {
-        localizer = (IStringLocalizer<Language>?)serviceProvider.GetService(typeof(IStringLocalizer<Language>));
-    }
+    private IStringLocalizer<Language>? Localizer { get; set; }
 
     private async Task ButtonClick(EventCallback eventCallback)
     {
-        Visible = false;
-        await eventCallback.InvokeAsync();
+        try
+        {
+            await HideDialog();
+            
+            if (eventCallback.HasDelegate)
+            {
+                await eventCallback.InvokeAsync();
+            }
+        }
+        catch (Exception)
+        {
+            // Log error if needed, but don't break the UI
+            // Consider adding ILogger injection for proper error logging
+        }
     }
 
     private string GetDialogSizeClass()
     {
-        return Size switch
+        var sizeClass = Size switch
         {
             DialogSize.Small => "modal-sm",
             DialogSize.Large => "modal-lg",
-            _ => ""
+            DialogSize.ExtraLarge => "modal-xl",
+            DialogSize.FullScreen => "modal-fullscreen",
+            _ => string.Empty
         };
+
+        return string.IsNullOrEmpty(CustomCssClass) ? sizeClass : $"{sizeClass} {CustomCssClass}";
     }
 
     /// <summary>
@@ -51,16 +69,15 @@ public partial class BsConfirmDialog : BsConfirmDialogBase
     /// <param name="message">The message for Modal Dialog</param>
     /// <param name="title">Text for the title at the top of the modal dialog. Ignored when HeaderTemplate is defined </param>
     /// <param name="buttons">Array of <see cref="ButtonItem" /></param>
-    public async Task ShowDialog(string message, string? title, IEnumerable<ButtonItem>? buttons)
+    /// <exception cref="ArgumentException">Thrown when message is null or empty</exception>
+    public async Task ShowDialog(string message, string? title = null, IEnumerable<ButtonItem>? buttons = null)
     {
+        ValidateMessage(message);
+
         Message = message;
-        Title = title ?? (localizer?["ConfirmString"] ?? "Confirm");
-        Buttons = buttons;
+        Title = title ?? (Localizer?["ConfirmString"] ?? "Confirm");
+        Buttons = buttons ?? Enumerable.Empty<ButtonItem>();
 
-        // Render the dialog
-        Visible = true;
-
-        StateHasChanged();
-        await Task.CompletedTask;
+        await ShowDialogInternal();
     }
 }
