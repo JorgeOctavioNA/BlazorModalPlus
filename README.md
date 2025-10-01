@@ -33,7 +33,7 @@ Both components support light and dark themes using the Parameter `DarkMode`.
 > [!NOTE]
 > The DarkMode is available since Bootstrap version 5.3. If you are using an older version, the DarkMode will not work.
 
-## ?? What's New in v1.4.0
+## ?? What's New in v1.4.0.1
 
 ### Performance Improvements
 - ? Better dependency injection with direct `IStringLocalizer` injection
@@ -64,7 +64,7 @@ Both components support light and dark themes using the Parameter `DarkMode`.
 
 # Changelog
 
-## [1.4.0] - 2025-01-XX
+## [1.4.0.1] - 2025-09-30
 ### Added
 - **Enhanced Accessibility**: Full ARIA attributes, keyboard navigation, and screen reader support
 - **New Dialog Sizes**: `ExtraLarge` and `FullScreen` options
