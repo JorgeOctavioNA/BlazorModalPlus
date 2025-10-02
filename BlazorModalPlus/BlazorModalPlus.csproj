@@ -17,20 +17,13 @@
 		<PackageProjectUrl>https://github.com/JorgeOctavioNA/BlazorModalPlus</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/JorgeOctavioNA/BlazorModalPlus</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<Version>1.4.0.0</Version>
+		<Version>1.4.0.1</Version>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<IncludeSymbols>True</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<PackageReleaseNotes>
-			Version 1.4.0:
-			- Improved performance with better dependency injection
-			- Enhanced accessibility with ARIA attributes and keyboard support
-			- Added new dialog sizes (ExtraLarge, FullScreen)
-			- Better error handling and parameter validation
-			- Added IDisposable implementation for resource cleanup
-			- Support for backdrop click and escape key handling
-			- Custom CSS classes support
-			- Improved documentation and XML comments
+			Version 1.4.0.1:
+			- Packages updated to the latest version.
 		</PackageReleaseNotes>
 	</PropertyGroup>
 
